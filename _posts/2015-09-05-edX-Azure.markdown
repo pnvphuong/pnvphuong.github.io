@@ -124,4 +124,5 @@ Because **release** must be a named branch, e.g. master or named-release/cypress
 Use the normal setting. There are 2 main modifications
 * Video URLs: must upload your videos on a host and provide links at the Video file URLs, don't use the available Youtube ID 
 * In menu `Settings`, `Advanced settings`, set `Mobile Course Available` to `true`
+* Remember to compress your videos to fit mobile settings, otherwise, they will not be accessed by the app
 Enjoy your courses on the mobile app
