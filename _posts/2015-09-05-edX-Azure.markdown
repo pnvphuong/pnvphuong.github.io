@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "Deploy edX platform on Window Azure"
+excerpt: "A nice post"
+date:   2014-07-02 10:00:00
+---
+
+In post shares the deployment process for Open edX release-named Cypress.
+Note that edX platform is evolving and there are different between versions. This post is for Cypress only
+
+# Installing
+Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-edx-on-microsoft-azure-2/) or [this blog](http://timsneath.com/installing-open-edx-on-microsoft-azure/). Will update my own later
+1. Having your Azure account registered
+2. Get RSA certifcation and private key for your account (GenPutty)
+3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3
+Requirements:
+* Ubuntu 12.04 amd64 (oraclejdk required)
+* Minimum 2GB of memory, 4GB recommended for production servers (with only 2GB some swap space is required, at least during installation)
+* At least one 2.00GHz CPU or EC2 compute unit
+* Minimum 25GB of free disk, 50GB recommended for production servers
+4. Pre update step for VM: 
+	sudo apt-get update -y
+	sudo apt-get upgrade -y
+	sudo reboot (this step, I prefer a GUI restart from Azure)
+5. run install script
+	screen -d -RR
+use the lastest development
+	wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash
+or a released version (don't work with cypress, MySQL error)
+	export OPENEDX_RELEASE=named-release/cypress
+	wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/install/sandbox.sh -O - | bash
+6. restart VM
+
+/edx/var/log/supervisor/lmstderr.log
+# Creating superuser
+Super user will be able to log into domain/admin to control other configuration. There are 2 ways
+* create superuser (with profile): Replace "user@example.com" with the email address you want to use, and replace "user" with the first part of the email address that you used. So for example, if you use "staff+87@yourdomain.com" for the email address, the username will be "staff+87".
+	cd /edx/app/edxapp/edx-platform
+	sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws create_user -s -p edx -e user@example.com
+	sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
+	sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
+
+	from django.contrib.auth.models import User
+	me = User.objects.get(username="user")
+	me.is_superuser = True
+	me.is_staff = True
+	me.save()
+	exit()
+* create superuser (without profile): prefer
+	sudo su edxapp -s /bin/bash
+	cd ~
+	source edxapp_env
+	python /edx/app/edxapp/edx-platform/manage.py lms createsuperuser --settings aws
+
+# Enabling SMTP
+Using gmail account (only work for clouding version, not work for vagrant local version)
+1. Enable IMAP for your gmail account
+2. Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing 'django.core.mail.backends.console.EmailBackend' to 'django.core.mail.backends.*smtp*.EmailBackend' (file locations start at `/edx/app/edxapp/edx-platform`)
+3. Add your gmail information in 'cms/envs/common.py '
+	EMAIL_HOST = 'smtp.gmail.com' 
+	EMAIL_PORT = 587 
+	EMAIL_HOST_USER = 'youruser@yourdomain.com' # or youruser@gmail.com 
+	EMAIL_HOST_PASSWORD = 'YourPassword' 
+	EMAIL_USE_TLS = True 
+	DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
+
+<!-- also change in /edx/app/edx_ansible/edx_ansible/playbooks/roles/edxapp/defaults/main.yml
+	EDXAPP_EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
+	EDXAPP_EMAIL_HOST: 'localhost'
+	EDXAPP_EMAIL_PORT: 25
+	EDXAPP_EMAIL_USE_TLS: False
+	EDXAPP_EMAIL_HOST_USER: ''
+	EDXAPP_EMAIL_HOST_PASSWORD: '' -->
+
+To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
+	"SITE_NAME":"{your_URL}"
+Note: I tried `sudo su edxapp bash` before modifying `/edx/app/edxapp/lms.env.json` but not sure if it is necessary or not
+4. Restart services
+* LMS/CMS `sudo /edx/bin/supervisorctl restart edxapp:`
+* Workers `sudo /edx/bin/supervisorctl restart edxapp_worker:`
+
+# Enabling mobile apps
+## Server side
+1. Enable Mobile Application Features: modify `/edx/app/edxapp/lms.env.json` as follow in the FEATURES section
+	"FEATURES" : {
+		...
+		"ENABLE_MOBILE_REST_API": true,
+		"ENABLE_OAUTH2_PROVIDER": true,
+		"ENABLE_COMBINED_LOGIN_REGISTRATION": true
+	}
+Remember "," in the previous existing line, e.g. "USE_CUSTOM_THEME"
+Also, if you don't have SSL enabled on your server, you need to modify (the entry has existed, just modify, don't add new) the following in `/edx/app/edxapp/lms.env.json` at the top level (outside FEATURES section)
+	"OAUTH_ENFORCE_SECURE": "",
+Restart server or wait until the next step
+2. Enable Push Notification on the Server: add into `/edx/app/edxapp/cms.auth.json` as follow 
+	PARSE_KEYS = {
+
+	  "APPLICATION_ID": "{app_id}",
+
+	  "REST_API_KEY": "{API_key}"
+
+	}
+restart server
+3. Create the OAuth Clients
+3.1. Log in to the Django administration console for your base URL, e.g. `http://**{your_URL}**/admin`
+3.2. In the **Oauth2** section, select **Clients**
+3.3. Select **Add client**. A dialog box opens with the **Client id** and **Client secret** populated for the new client.
+3.4. Enter a **Url** and **Redirect Url** for the first application, e.g. https://**{your_URL}**/api/mobile/{version}/?app=andriod
+3.5. For the **Client type**, select **Public**
+3.6. Select **Save and add another**
+3.7. Repeat steps 4-6 for the second application, and then select **Save**
+## Client side
+TBA
+# Notes
+* Configuration files main.yml(s) are located at `/edx/app/edx_ansible/edx_ansible/playbooks/roles/...`
+* To update edxplatform (fork from github): run this
+	sudo /edx/bin/update edx-platform master
+Don't do this
+	sudo /edx/bin/update edx-platform release
+Because **release** must be a named branch, e.g. master or named-release/cypress (the installed version in step Install)
+
+# Create mobile friendly courses on edX
+## Create a course
+Use the normal setting. There are 2 main modifications
+* Video URLs: must upload your videos on a host and provide links at the Video file URLs, don't use the available Youtube ID 
+* In menu `Settings`, `Advanced settings`, set `Mobile Course Available` to `true`
+Enjoy your courses on the mobile app
