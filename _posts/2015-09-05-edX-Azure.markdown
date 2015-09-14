@@ -12,7 +12,7 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 
 1. Having your Azure account registered
 2. Get RSA certifcation and private key for your account (GenPutty)
-3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3.
+3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3 (build Sep 08, 15, newer version may not work failed with 09/09/2015).
 4. Pre update step for VM: 
 ```bash
 sudo apt-get update -y
