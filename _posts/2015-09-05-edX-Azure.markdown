@@ -14,35 +14,27 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 2. Get RSA certifcation and private key for your account (GenPutty)
 3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3 (build Sep 08, 15, newer version may not work failed with 09/09/2015).
 4. Pre update step for VM:
-
 ```
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo reboot (this step, I prefer a GUI restart from Azure)
 ```
-
 5. run install script
-
 ```
 screen -d -RR
 ```
-
 use the lastest development
-
 ```
 wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash
 ```
-
 or a released version
-
 ```
 export OPENEDX_RELEASE=named-release/cypress
 wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/install/sandbox.sh -O - | bash
 ```
-
 6. restart VM
-
 Error log can be found here `/edx/var/log/supervisor/lmstderr.log`
+
 # Creating superuser
 Super user will be able to log into domain/admin to control other configuration. There are 2 ways
 * create superuser (with profile): Replace "user@example.com" with the email address you want to use, and replace "user" with the first part of the email address that you used. So for example, if you use "staff+87@yourdomain.com" for the email address, the username will be "staff+87".
