@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Deploy edX platform on Window Azure"
-excerpt: "A nice post"
 date:   2014-07-02 10:00:00
 ---
 
@@ -9,7 +8,7 @@ In post shares the deployment process for Open edX release-named Cypress.
 Note that edX platform is evolving and there are different between versions. This post is for Cypress only
 
 # Installing
-Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-edx-on-microsoft-azure-2/) or [this blog](http://timsneath.com/installing-open-edx-on-microsoft-azure/). Will update my own later
+Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-edx-on-microsoft-azure-2/) or [this blog](http://timsneath.com/installing-open-edx-on-microsoft-azure/). Will update my own later.
 1. Having your Azure account registered
 2. Get RSA certifcation and private key for your account (GenPutty)
 3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3
