@@ -64,7 +64,11 @@ python /edx/app/edxapp/edx-platform/manage.py lms createsuperuser --settings aws
 Using gmail account (only work for clouding version, not work for vagrant local version)
 
 1. Enable IMAP for your gmail account
-2. Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to `django.core.mail.backends.**smtp**.EmailBackend` (file locations start at `/edx/app/edxapp/edx-platform`)
+2. Go to the folder 
+```
+cd /edx/app/edxapp/edx-platform
+```
+Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to `django.core.mail.backends.**smtp**.EmailBackend`
 3. Add your gmail information in `cms/envs/common.py`
 ```
 EMAIL_HOST = 'smtp.gmail.com' 
