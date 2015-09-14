@@ -86,6 +86,9 @@ Note: I tried `sudo su edxapp bash` before modifying `/edx/app/edxapp/lms.env.js
 * LMS/CMS `sudo /edx/bin/supervisorctl restart edxapp:`
 * Workers `sudo /edx/bin/supervisorctl restart edxapp_worker:`
 
+# Customize
+Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/app/edxapp/lms.env.json` and `/edx/app/edxapp/cms.env.json`
+
 # Enabling mobile apps
 ## Server side
 1. Enable Mobile Application Features: modify `/edx/app/edxapp/lms.env.json` as follow in the FEATURES section
