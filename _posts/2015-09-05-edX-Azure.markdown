@@ -63,15 +63,16 @@ python /edx/app/edxapp/edx-platform/manage.py lms createsuperuser --settings aws
 # Enabling SMTP
 Using gmail account (only work for clouding version, not work for vagrant local version)
 1. Enable IMAP for your gmail account
-2. Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing 'django.core.mail.backends.console.EmailBackend' to 'django.core.mail.backends.*smtp*.EmailBackend' (file locations start at `/edx/app/edxapp/edx-platform`)
-3. Add your gmail information in 'cms/envs/common.py '
-	EMAIL_HOST = 'smtp.gmail.com' 
-	EMAIL_PORT = 587 
-	EMAIL_HOST_USER = 'youruser@yourdomain.com' # or youruser@gmail.com 
-	EMAIL_HOST_PASSWORD = 'YourPassword' 
-	EMAIL_USE_TLS = True 
-	DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
-
+2. Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to `django.core.mail.backends.**smtp**.EmailBackend` (file locations start at `/edx/app/edxapp/edx-platform`)
+3. Add your gmail information in `cms/envs/common.py`
+```python
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_PORT = 587 
+EMAIL_HOST_USER = 'youruser@yourdomain.com' # or youruser@gmail.com 
+EMAIL_HOST_PASSWORD = 'YourPassword' 
+EMAIL_USE_TLS = True 
+DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
+```
 <!-- also change in /edx/app/edx_ansible/edx_ansible/playbooks/roles/edxapp/defaults/main.yml
 	EDXAPP_EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
 	EDXAPP_EMAIL_HOST: 'localhost'
@@ -81,7 +82,9 @@ Using gmail account (only work for clouding version, not work for vagrant local 
 	EDXAPP_EMAIL_HOST_PASSWORD: '' -->
 
 To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
-	"SITE_NAME":"{your_URL}"
+```jason
+"SITE_NAME":"{your_URL}"
+```
 Note: I tried `sudo su edxapp bash` before modifying `/edx/app/edxapp/lms.env.json` but not sure if it is necessary or not
 4. Restart services
 * LMS/CMS `sudo /edx/bin/supervisorctl restart edxapp:`
