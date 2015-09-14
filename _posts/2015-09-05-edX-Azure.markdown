@@ -13,12 +13,6 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 1. Having your Azure account registered
 2. Get RSA certifcation and private key for your account (GenPutty)
 3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3.
-
-Requirements:
-* Ubuntu 12.04 amd64 (oraclejdk required)
-* Minimum 2GB of memory, 4GB recommended for production servers (with only 2GB some swap space is required, at least during installation)
-* At least one 2.00GHz CPU or EC2 compute unit
-* Minimum 25GB of free disk, 50GB recommended for production servers
 4. Pre update step for VM: 
 	sudo apt-get update -y
 	sudo apt-get upgrade -y
