@@ -13,25 +13,33 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 1. Having your Azure account registered
 2. Get RSA certifcation and private key for your account (GenPutty)
 3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3 (build Sep 08, 15, newer version may not work failed with 09/09/2015).
-4. Pre update step for VM: 
+4. Pre update step for VM:
+
 ```
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo reboot (this step, I prefer a GUI restart from Azure)
 ```
+
 5. run install script
+
 ```
 screen -d -RR
 ```
+
 use the lastest development
+
 ```
 wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash
 ```
-or a released version (don't work with cypress, MySQL error)
+
+or a released version
+
 ```
 export OPENEDX_RELEASE=named-release/cypress
 wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/install/sandbox.sh -O - | bash
 ```
+
 6. restart VM
 
 Error log can be found here `/edx/var/log/supervisor/lmstderr.log`
@@ -66,7 +74,7 @@ Using gmail account (only work for clouding version, not work for vagrant local 
 1. Enable IMAP for your gmail account
 2. Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to `django.core.mail.backends.**smtp**.EmailBackend` (file locations start at `/edx/app/edxapp/edx-platform`)
 3. Add your gmail information in `cms/envs/common.py`
-```python
+```
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587 
 EMAIL_HOST_USER = 'youruser@yourdomain.com' # or youruser@gmail.com 
@@ -74,16 +82,9 @@ EMAIL_HOST_PASSWORD = 'YourPassword'
 EMAIL_USE_TLS = True 
 DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
 ```
-<!-- also change in /edx/app/edx_ansible/edx_ansible/playbooks/roles/edxapp/defaults/main.yml
-	EDXAPP_EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
-	EDXAPP_EMAIL_HOST: 'localhost'
-	EDXAPP_EMAIL_PORT: 25
-	EDXAPP_EMAIL_USE_TLS: False
-	EDXAPP_EMAIL_HOST_USER: ''
-	EDXAPP_EMAIL_HOST_PASSWORD: '' -->
 
 To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
-```jason
+```
 "SITE_NAME":"{your_URL}"
 ```
 Note: I tried `sudo su edxapp bash` before modifying `/edx/app/edxapp/lms.env.json` but not sure if it is necessary or not
