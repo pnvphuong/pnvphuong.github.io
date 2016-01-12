@@ -31,8 +31,7 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
         ```
         wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash
         ```
-        
-        or a released version
+    or a released version
         
         ```
         export OPENEDX_RELEASE=named-release/cypress
@@ -45,53 +44,61 @@ Error log can be found here `/edx/var/log/supervisor/lmstderr.log`
 # Creating superuser
 Super user will be able to log into domain/admin to control other configuration. There are 2 ways
 * create superuser (with profile): Replace "user@example.com" with the email address you want to use, and replace "user" with the first part of the email address that you used. So for example, if you use "staff+87@yourdomain.com" for the email address, the username will be "staff+87".
-```
-cd /edx/app/edxapp/edx-platform
-sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws create_user -s -p edx -e user@example.com
-sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
-sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
-```
-```
-from django.contrib.auth.models import User
-me = User.objects.get(username="user")
-me.is_superuser = True
-me.is_staff = True
-me.save()
-exit()
-```
+        
+        ```
+        cd /edx/app/edxapp/edx-platform
+        sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws create_user -s -p edx -e user@example.com
+        sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
+        sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
+        ```
+        
+        
+        ```
+        from django.contrib.auth.models import User
+        me = User.objects.get(username="user")
+        me.is_superuser = True
+        me.is_staff = True
+        me.save()
+        exit()
+        ```
+        
 * create superuser (without profile): prefer
-```
-sudo su edxapp -s /bin/bash
-cd ~
-source edxapp_env
-python /edx/app/edxapp/edx-platform/manage.py lms createsuperuser --settings aws
-```
+        
+        ```
+        sudo su edxapp -s /bin/bash
+        cd ~
+        source edxapp_env
+        python /edx/app/edxapp/edx-platform/manage.py lms createsuperuser --settings aws
+        ```
 
 # Enabling SMTP
 Using gmail account (only work for clouding version, not work for vagrant local version)
 
 1. Enable IMAP for your gmail account
 2. Go to the folder 
-```
-cd /edx/app/edxapp/edx-platform
-```
-Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to `django.core.mail.backends.**smtp**.EmailBackend`
+        
+        ```
+        cd /edx/app/edxapp/edx-platform
+        ```
+        
+    Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to `django.core.mail.backends.**smtp**.EmailBackend`
 3. Add your gmail information in `cms/envs/common.py`
-```
-EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_PORT = 587 
-EMAIL_HOST_USER = 'youruser@yourdomain.com' # or youruser@gmail.com 
-EMAIL_HOST_PASSWORD = 'YourPassword' 
-EMAIL_USE_TLS = True 
-DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
-```
-
-To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
-```
-"SITE_NAME":"{your_URL}"
-```
-Note: I tried `sudo su edxapp bash` before modifying `/edx/app/edxapp/lms.env.json` but not sure if it is necessary or not
-
+        
+        ```
+        EMAIL_HOST = 'smtp.gmail.com' 
+        EMAIL_PORT = 587 
+        EMAIL_HOST_USER = 'youruser@yourdomain.com' # or youruser@gmail.com 
+        EMAIL_HOST_PASSWORD = 'YourPassword' 
+        EMAIL_USE_TLS = True 
+        DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
+        ```
+        
+    To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
+        ```
+        "SITE_NAME":"{your_URL}"
+        ```
+    Note: I tried `sudo su edxapp bash` before modifying `/edx/app/edxapp/lms.env.json` but not sure if it is necessary or not
+        
 4. Restart services
 
 * LMS/CMS `sudo /edx/bin/supervisorctl restart edxapp:`
