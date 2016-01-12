@@ -38,21 +38,21 @@ Error log can be found here `/edx/var/log/supervisor/lmstderr.log`
 # Creating superuser
 Super user will be able to log into domain/admin to control other configuration. There are 2 ways
 * create superuser (with profile): Replace "user@example.com" with the email address you want to use, and replace "user" with the first part of the email address that you used. So for example, if you use "staff+87@yourdomain.com" for the email address, the username will be "staff+87".
-        
-        cd /edx/app/edxapp/edx-platform
-        sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws create_user -s -p edx -e user@example.com
-        sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
-        sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
-        
+    
+    cd /edx/app/edxapp/edx-platform
+    sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws create_user -s -p edx -e user@example.com
+    sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
+    sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
+    
 then
-        
-        from django.contrib.auth.models import User
-        me = User.objects.get(username="user")
-        me.is_superuser = True
-        me.is_staff = True
-        me.save()
-        exit()
-        
+    
+    from django.contrib.auth.models import User
+    me = User.objects.get(username="user")
+    me.is_superuser = True
+    me.is_staff = True
+    me.save()
+    exit()
+    
 * create superuser (without profile): prefer
         
         sudo su edxapp -s /bin/bash
