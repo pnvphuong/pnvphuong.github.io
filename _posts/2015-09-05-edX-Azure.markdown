@@ -26,7 +26,7 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
         ```
         screen -d -RR
         ```
-        use the lastest development
+    use the lastest development
         
         ```
         wget https://raw.githubusercontent.com/edx/configuration/master/util/install/sandbox.sh -O - | bash
