@@ -44,7 +44,7 @@ Super user will be able to log into domain/admin to control other configuration.
         sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
         sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
         
-     then
+then
         
         from django.contrib.auth.models import User
         me = User.objects.get(username="user")
@@ -119,25 +119,26 @@ Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/ap
     
     restart server
 3. Create the OAuth Clients
-    1. Log in to the Django administration console for your base URL, e.g. `http://**{your_URL}**/admin`
-    2. In the **Oauth2** section, select **Clients**
-    3. Select **Add client**. A dialog box opens with the **Client id** and **Client secret** populated for the new client.
-    4. Enter a **Url** and **Redirect Url** for the first application, e.g. https://**{your_URL}**/api/mobile/{version}/?app=andriod
-    5. For the **Client type**, select **Public**
-    6. Select **Save and add another**
-    7. Repeat steps 4-6 for the second application, and then select **Save**
+  1. Log in to the Django administration console for your base URL, e.g. `http://**{your_URL}**/admin`
+  2. In the **Oauth2** section, select **Clients**
+  3. Select **Add client**. A dialog box opens with the **Client id** and **Client secret** populated for the new client.
+  4. Enter a **Url** and **Redirect Url** for the first application, e.g. https://**{your_URL}**/api/mobile/{version}/?app=andriod
+  5. For the **Client type**, select **Public**
+  6. Select **Save and add another**
+  7. Repeat steps 4-6 for the second application, and then select **Save**
 ## Client side
 TBA
 # Notes
 * Configuration files main.yml(s) are located at `/edx/app/edx_ansible/edx_ansible/playbooks/roles/...`
 * To update edxplatform (fork from github): run this
-	
-        sudo /edx/bin/update edx-platform master
-    Don't do this
-	
-        sudo /edx/bin/update edx-platform release
     
-    Because **release** must be a named branch, e.g. *master* or *named-release/cypress* (the installed version in step Install)
+    sudo /edx/bin/update edx-platform master
+    
+Don't do this
+    
+    sudo /edx/bin/update edx-platform release
+    
+Because **release** must be a named branch, e.g. *master* or *named-release/cypress* (the installed version in step Install)
 
 # Create mobile friendly courses on edX
 ## Create a course
@@ -147,9 +148,11 @@ Use the normal setting. There are 2 main modifications
 * Remember to compress your videos to fit mobile settings, otherwise, they will not be accessed by the app
 Enjoy your courses on the mobile app
 ## Remove a course
-        
-        cd /edx/app/edxapp/edx-platform
-	sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course Organization/CourseNumber/CourseRun commit
+    
+    cd /edx/app/edxapp/edx-platform
+    sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course Organization/CourseNumber/CourseRun 
+    
+commit
 	
 e.g.
-	`sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course course-v1:Pitt+AT000+2015_Fall commit`
+        sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course course-v1:Pitt+AT000+2015_Fall commit
