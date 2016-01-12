@@ -51,7 +51,7 @@ Super user will be able to log into domain/admin to control other configuration.
         sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
         sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
         ```
-        
+    
         
         ```
         from django.contrib.auth.models import User
@@ -110,25 +110,35 @@ Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/ap
 # Enabling mobile apps
 ## Server side
 1. Enable Mobile Application Features: modify `/edx/app/edxapp/lms.env.json` as follow in the FEATURES section
-	"FEATURES" : {
+        
+        ```
+        "FEATURES" : {
 		...
 		"ENABLE_MOBILE_REST_API": true,
 		"ENABLE_OAUTH2_PROVIDER": true,
 		"ENABLE_COMBINED_LOGIN_REGISTRATION": true
 	}
+	```
+	
 Remember "," in the previous existing line, e.g. "USE_CUSTOM_THEME"
 Also, if you don't have SSL enabled on your server, you need to modify (the entry has existed, just modify, don't add new) the following in `/edx/app/edxapp/lms.env.json` at the top level (outside FEATURES section)
-	"OAUTH_ENFORCE_SECURE": "",
-Restart server or wait until the next step
+        
+	`"OAUTH_ENFORCE_SECURE": "",`
+	
+    Restart server or wait until the next step
 2. Enable Push Notification on the Server: add into `/edx/app/edxapp/cms.auth.json` as follow 
-	PARSE_KEYS = {
+	
+	```
+        PARSE_KEYS = {
 
 	  "APPLICATION_ID": "{app_id}",
 
 	  "REST_API_KEY": "{API_key}"
 
 	}
-restart server
+	```
+	
+    restart server
 3. Create the OAuth Clients
 3.1. Log in to the Django administration console for your base URL, e.g. `http://**{your_URL}**/admin`
 3.2. In the **Oauth2** section, select **Clients**
@@ -155,7 +165,11 @@ Use the normal setting. There are 2 main modifications
 * Remember to compress your videos to fit mobile settings, otherwise, they will not be accessed by the app
 Enjoy your courses on the mobile app
 ## Remove a course
-	cd /edx/app/edxapp/edx-platform
+        
+        ```	
+        cd /edx/app/edxapp/edx-platform
 	sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course Organization/CourseNumber/CourseRun commit
+	```
+	
 e.g.
-	sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course course-v1:Pitt+AT000+2015_Fall commit
+	`sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course course-v1:Pitt+AT000+2015_Fall commit`
