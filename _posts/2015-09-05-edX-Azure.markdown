@@ -44,7 +44,7 @@ Super user will be able to log into domain/admin to control other configuration.
         sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws changepassword user
         sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws shell
         
-     
+     then
         
         from django.contrib.auth.models import User
         me = User.objects.get(username="user")
@@ -101,8 +101,8 @@ Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/ap
 		"ENABLE_MOBILE_REST_API": true,
 		"ENABLE_OAUTH2_PROVIDER": true,
 		"ENABLE_COMBINED_LOGIN_REGISTRATION": true
-	}
-	
+        }
+    
     Remember "," in the previous existing line, e.g. "USE_CUSTOM_THEME"
     Also, if you don't have SSL enabled on your server, you need to modify (the entry has existed, just modify, don't add new) the following in `/edx/app/edxapp/lms.env.json` at the top level (outside FEATURES section)
         
