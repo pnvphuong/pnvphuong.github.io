@@ -15,9 +15,11 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3 (build Sep 08, 15, newer version may not work failed with 09/09/2015).
 4. Pre update step for VM:
 
-	sudo apt-get update -y
-	sudo apt-get upgrade -y
-	sudo reboot (this step, I prefer a GUI restart from Azure)
+```
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo reboot (this step, I prefer a GUI restart from Azure)
+```
 
 5. run install script
 ```
