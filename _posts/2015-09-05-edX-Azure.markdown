@@ -121,13 +121,13 @@ Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/ap
     
     restart server
 3. Create the OAuth Clients
-  3.1. Log in to the Django administration console for your base URL, e.g. `http://**{your_URL}**/admin`
-  3.2. In the **Oauth2** section, select **Clients**
-  3.3. Select **Add client**. A dialog box opens with the **Client id** and **Client secret** populated for the new client.
-  3.4. Enter a **Url** and **Redirect Url** for the first application, e.g. https://**{your_URL}**/api/mobile/{version}/?app=andriod
-  3.5. For the **Client type**, select **Public**
-  3.6. Select **Save and add another**
-  3.7. Repeat steps 4-6 for the second application, and then select **Save**
+    3.1. Log in to the Django administration console for your base URL, e.g. `http://**{your_URL}**/admin`
+    3.2. In the **Oauth2** section, select **Clients**
+    3.3. Select **Add client**. A dialog box opens with the **Client id** and **Client secret** populated for the new client.
+    3.4. Enter a **Url** and **Redirect Url** for the first application, e.g. https://**{your_URL}**/api/mobile/{version}/?app=andriod
+    3.5. For the **Client type**, select **Public**
+    3.6. Select **Save and add another**
+    3.7. Repeat steps 4-6 for the second application, and then select **Save**
 ## Client side
 TBA
 # Notes
