@@ -12,7 +12,7 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 
 1. Having your Azure account registered
 2. Get RSA certifcation and private key for your account (GenPutty)
-3. Create VM Ubuntu 12.x on Azure, VM size on Azure at least A2 (failed with lower than this). Trying with A3 (build Sep 08, 15, newer version may not work failed with 09/09/2015).
+3. Create VM Ubuntu 12.x (build Sep 08, 15, newer version may not work failed with 09/09/2015) on Azure. Currently I am using A3, lower machines give errors.
 4. Pre update step for VM:
         
         sudo apt-get update -y
@@ -33,6 +33,7 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
         wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/install/sandbox.sh -O - | bash
         
 6. restart VM
+
 Error log can be found here `/edx/var/log/supervisor/lmstderr.log`
 
 # Creating superuser
