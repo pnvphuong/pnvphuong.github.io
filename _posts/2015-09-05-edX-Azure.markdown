@@ -37,7 +37,7 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 
 Error log can be found here `/edx/var/log/supervisor/lmstderr.log`
 
-## Connect to edX virtual machine through Remote Desktop Connection
+## Using Remote Desktop Connection
 The guideline above uses Putty to connect. If you want to connect using Remote Desktop Connection, do the following (credit Priyanka Sanjeev Walke for this section)
 1.  Connect to the VM via Putty.
 2. Install the Gnome desktop using
@@ -47,7 +47,7 @@ The guideline above uses Putty to connect. If you want to connect using Remote D
 3. Install xrdp using
   sudo apt-get install xrdp
   
-4. Now, switch back to the Windows Azure portal, and add an Endpoint for ‘Remote Desktop’ for your virtual machine.
+4. Switch back to the Windows Azure portal, and add an Endpoint for ‘Remote Desktop’ for your virtual machine.
 5. Switch back to the virtual machines page which lists all the available VM’s and select your VM. The dashboard now shows a ‘Connect’ button which is enabled. Click on “Connect” and a file `your_VM_Name.rdp` is downloaded.
 6. Double click on your RDP file and it opens the login window. Enter your Azure VM credentials and you are now ready to use your Ubuntu VM via RDP. Enjoy.
 
