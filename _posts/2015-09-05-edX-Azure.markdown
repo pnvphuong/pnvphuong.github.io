@@ -150,7 +150,8 @@ Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/ap
   
 ## Client side
 General configuration can be found [here] (http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/mobile.html)
-Note: only need to add the site url and OAUTH\_CLIENT\_ID in the yaml file. iOS version used to have connection troubles when adding more entries, e.g. client secret id
+
+Note: only need to add the _API\_HOST\_URL_ and _OAUTH\_CLIENT\_ID_ in the yaml file. iOS version used to have connection troubles when adding more entries, e.g. client secret id
 
 # Notes
 * Configuration files main.yml(s) are located at `/edx/app/edx_ansible/edx_ansible/playbooks/roles/...`
