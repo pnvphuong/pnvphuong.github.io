@@ -172,6 +172,7 @@ Use the normal setting. There are 2 main modifications
 * In menu `Settings`, `Advanced settings`, set `Mobile Course Available` to `true`
 * Remember to compress your videos to fit mobile settings, otherwise, they will not be accessed by the app
 Enjoy your courses on the mobile app
+
 ## Remove a course
         
         cd /edx/app/edxapp/edx-platform
