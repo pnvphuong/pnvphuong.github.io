@@ -98,6 +98,7 @@ Using gmail account (only work for clouding version, not work for vagrant local 
         DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
         
     Note: since Dogwood, edX supports mailing server, the system can send email without requiring our own email.
+    
     To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
         
         "SITE_NAME":"{your_URL}"
