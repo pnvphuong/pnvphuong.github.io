@@ -181,3 +181,7 @@ Enjoy your courses on the mobile app
 e.g.
         
         sudo -u www-data /edx/bin/python.edxapp ./manage.py cms --settings=aws delete_course course-v1:Pitt+AT000+2015_Fall commit
+        
+Note that in Dogwood, _commit_ is not used.
+
+An easier approach is using the GUI at http://_your studio site_/admin
