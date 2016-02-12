@@ -37,8 +37,9 @@ Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-
 
 Error log can be found here `/edx/var/log/supervisor/lmstderr.log`
 
-## Using Remote Desktop Connection
+### Using Remote Desktop Connection
 The guideline above uses Putty to connect. If you want to connect using Remote Desktop Connection, do the following (credit Priyanka Sanjeev Walke for this section)
+
 1.  Connect to the VM via Putty.
 2. Install the Gnome desktop using
         
