@@ -109,7 +109,9 @@ Using gmail account (only work for clouding version, not work for vagrant local 
 * Workers `sudo /edx/bin/supervisorctl restart edxapp_worker:`
 
 To change the _sender_ email address (which is _registration@example.com_ by default), we can search all files containing the word _registration@example.com_. By doing this on console,
+    
     sudo grep -rl "registration@example.com" /edx/ > ~/match.txt
+    
 (it will take a while, be prepared). This command will search all files containing _registration@example.com_ and write into the file _match.txt_ in the home folder.
 
 **Importrant**: let your users checking their **spam mail folder** if they did not see the activation email.
