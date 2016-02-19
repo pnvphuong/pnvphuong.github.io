@@ -87,7 +87,7 @@ Using gmail account (only work for clouding version, not work for vagrant local 
         
         cd /edx/app/edxapp/edx-platform
         
-    Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to `django.core.mail.backends.**smtp**.EmailBackend`
+    Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to _django.core.mail.backends.**smtp**.EmailBackend_
 3. Add your gmail information in `cms/envs/common.py`
         
         EMAIL_HOST = 'smtp.gmail.com' 
@@ -108,9 +108,11 @@ Using gmail account (only work for clouding version, not work for vagrant local 
 * LMS/CMS `sudo /edx/bin/supervisorctl restart edxapp:`
 * Workers `sudo /edx/bin/supervisorctl restart edxapp_worker:`
 
-To change the _sender_ email address (which is _registration@example.com_ by default), we can search all files containing the word _registration@example.com_. By doing this on console, `sudo grep -rl "registration@example.com" /edx/ > ~/match.txt` . This command will search all files containing _registration@example.com_ and write into the file _match.txt_ in the home folder.
+To change the _sender_ email address (which is _registration@example.com_ by default), we can search all files containing the word _registration@example.com_. By doing this on console,
+    sudo grep -rl "registration@example.com" /edx/ > ~/match.txt
+(it will take a while, be prepared). This command will search all files containing _registration@example.com_ and write into the file _match.txt_ in the home folder.
 
-*Importrant*: let your users checking their *spam mail folder* if they did not see the activation email.
+**Importrant**: let your users checking their **spam mail folder** if they did not see the activation email.
 
 # Customize
 Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/app/edxapp/lms.env.json` and `/edx/app/edxapp/cms.env.json`
