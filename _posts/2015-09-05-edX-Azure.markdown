@@ -117,7 +117,14 @@ To change the _sender_ email address (which is _registration@example.com_ by def
 **Importrant**: let your users checking their **spam mail folder** if they did not see the activation email.
 
 # Customize
+## Platform name
 Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/app/edxapp/lms.env.json` and `/edx/app/edxapp/cms.env.json`
+## Activation email content
+Modifying the content in these text files
+    /edx/app/edxapp/edx-platform/lms/templates/emails/activation_email.txt
+    /edx/app/edxapp/edx-platform/cms/templates/emails/activation_email.txt
+    
+Note that the theme of the default Dogwood version belongs to the last `else` statement in those text files.
 
 # Enabling mobile apps
 ## Server side
