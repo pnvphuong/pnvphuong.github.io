@@ -97,6 +97,14 @@ Using gmail account (only work for clouding version, not work for vagrant local 
         EMAIL_USE_TLS = True 
         DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
         
+    As well as in `lms/envs/aws.py`
+                
+        EMAIL_HOST = ENV_TOKENS.get('EMAIL_HOST', 'smtp.gmail.com') # django default is localhost
+        EMAIL_PORT = ENV_TOKENS.get('EMAIL_PORT', 587) # django default is 25
+        EMAIL_USE_TLS = ENV_TOKENS.get('EMAIL_USE_TLS', True) # django default is False
+        EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', 'youruser@yourdomain.com') # django default is ''
+        EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', 'YourPassword') # django default is ''
+        
     Note: since Dogwood, edX supports mailing server, the system can send email without requiring our own email.
     
     To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
