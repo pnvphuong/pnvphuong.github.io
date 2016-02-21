@@ -124,11 +124,22 @@ To change the _sender_ email address (which is _registration@example.com_ by def
 
 **Importrant**: let your users checking their **spam mail folder** if they did not see the activation email.
 
+The above information may not be correct. Found 4 important files for smtp:
+
+    /edx/app/edxapp/cms.env.json
+    /edx/app/edxapp/lms.env.json
+    /edx/app/edxapp/cms.auth.json
+    /edx/app/edxapp/lms.auth.json
+    
+Still couldn't make it send through gmail. But at least, it raised some error related to smtp from gmail (SMTPAuthenticationError: (534, '5.7.14 <https://accounts.google.com/ContinueSignIn?sarp=1&scc=1&plt=AKgnsbuQq\n5.7.14 -piC_VEVrfPseeYEDyBMGXr5rsu1OTVHwTEL-9c-6svnEg87xsaxIuU2lKQ1un-jpoiiGL\n5.7.14 DiRc_ZdWIAnHldZCyHXEt9PElvKawOTE490BKGaP4o-ZHhRFWEmbV3lSCDWvAkNjU4scti\n5.7.14 ZMX_tgpl5I_OqyPYNVL0YL9KXxA1gyGBM7yKcKWoMf98riNLm_TwJTPeQ7iGPM4E_sATpq\n5.7.14 Dyq0hfJs3kYsVCZels2NmS5GEghE> Please log in via your web browser and\n5.7.14 then try again.\n5.7.14  Learn more at\n5.7.14  https://support.google.com/mail/answer/78754 5sm1809000qky.21 - gsmtp')).
+Note that we can use Java to send email from the gmail account successfully. So it may because of either Django setting on the server or Gmail account (but Gmail account worked with java already!)
+
 # Customize
 ## Platform name
 Change *Your Platform Name is Here*, change the `PLATFORM_NAME` in both `/edx/app/edxapp/lms.env.json` and `/edx/app/edxapp/cms.env.json`
 ## Activation email content
 Modifying the content in these text files
+    
     /edx/app/edxapp/edx-platform/lms/templates/emails/activation_email.txt
     /edx/app/edxapp/edx-platform/cms/templates/emails/activation_email.txt
     
