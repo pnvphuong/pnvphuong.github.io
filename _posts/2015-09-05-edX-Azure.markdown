@@ -82,57 +82,41 @@ then
 # Enabling SMTP
 Using gmail account (only work for clouding version, not work for vagrant local version)
 
-1. Enable IMAP for your gmail account
-2. Go to the folder 
+1. Enable IMAP for your gmail account, activate 2-step authentication and create an app password for edX
+2. Modify file `/edx/app/edxapp/cms.env.json` and `/edx/app/edxapp/lms.env.json`
         
-        cd /edx/app/edxapp/edx-platform
+        "EMAIL_HOST": "smtp.gmail.com",
+        "EMAIL_PORT": 587,
+        "EMAIL_USE_TLS": true,
         
-    Modify [files](https://github.com/edx/edx-platform/search?q=django.core.mail.backends.console.EmailBackend&type=Code) on your system: changing `django.core.mail.backends.console.EmailBackend` to _django.core.mail.backends.**smtp**.EmailBackend_
-3. Add your gmail information in `cms/envs/common.py`
+3. Modify file `/edx/app/edxapp/cms.auth.json` and `/edx/app/edxapp/lms.auth.json`
         
-        EMAIL_HOST = 'smtp.gmail.com' 
-        EMAIL_PORT = 587 
-        EMAIL_HOST_USER = 'youruser@yourdomain.com' # or youruser@gmail.com 
-        EMAIL_HOST_PASSWORD = 'YourPassword' 
-        EMAIL_USE_TLS = True 
-        DEFAULT_FROM_EMAIL = 'you@yourdomain.com'
-        
-    As well as in `lms/envs/aws.py`
-                
-        EMAIL_HOST = ENV_TOKENS.get('EMAIL_HOST', 'smtp.gmail.com') # django default is localhost
-        EMAIL_PORT = ENV_TOKENS.get('EMAIL_PORT', 587) # django default is 25
-        EMAIL_USE_TLS = ENV_TOKENS.get('EMAIL_USE_TLS', True) # django default is False
-        EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', 'youruser@yourdomain.com') # django default is ''
-        EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', 'YourPassword') # django default is ''
-        
-    Note: since Dogwood, edX supports mailing server, the system can send email without requiring our own email.
+        "EMAIL_HOST_PASSWORD": "your gmail app password for edX"
+        "EMAIL_HOST_USER": "your gmail address" # including @gmail.com
     
-    To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
+4. Modify file `/edx/app/edxapp/edx-platform/cms/envs/common.py`
+        
+        DEFAULT_FROM_EMAIL = "the sender email address" # this email address can be different from your gmail account
+        
+5. To enable custom activation url modify `/edx/app/edxapp/lms.env.json`, change
         
         "SITE_NAME":"{your_URL}"
     
-4. Restart services (I tried `sudo su edxapp bash` before doing this but not sure if it is necessary or not)
+6. Restart services (I tried `sudo su edxapp bash` before doing this but not sure if it is necessary or not)
+        
+        sudo su edxapp bash
+        sudo /edx/bin/supervisorctl restart edxapp:
+        sudo /edx/bin/supervisorctl restart edxapp_worker:
+        
+Note: gmail may block the account if many emails were sent. If this happen, roll back to the built in mail server of edX (with a high chance that all registration emails will be ended up in Spam mail folder) or find a professional SMTP service, e.g. mandrill
 
-* LMS/CMS `sudo /edx/bin/supervisorctl restart edxapp:`
-* Workers `sudo /edx/bin/supervisorctl restart edxapp_worker:`
-
-To change the _sender_ email address (which is _registration@example.com_ by default), we can search all files containing the word _registration@example.com_. By doing this on console,
+Hint: To search all files containing a specific string, e.g. _registration@example.com_. By doing this on console,
     
     sudo grep -rl "registration@example.com" /edx/ > ~/match.txt
     
 (it will take a while, be prepared). This command will search all files containing _registration@example.com_ and write into the file _match.txt_ in the home folder.
 
 **Importrant**: let your users checking their **spam mail folder** if they did not see the activation email.
-
-The above information may not be correct. Found 4 important files for smtp:
-
-    /edx/app/edxapp/cms.env.json
-    /edx/app/edxapp/lms.env.json
-    /edx/app/edxapp/cms.auth.json
-    /edx/app/edxapp/lms.auth.json
-    
-Still couldn't make it send through gmail. But at least, it raised some error related to smtp from gmail (SMTPAuthenticationError: (534, '5.7.14 <https://accounts.google.com/ContinueSignIn?sarp=1&scc=1&plt=AKgnsbuQq\n5.7.14 -piC_VEVrfPseeYEDyBMGXr5rsu1OTVHwTEL-9c-6svnEg87xsaxIuU2lKQ1un-jpoiiGL\n5.7.14 DiRc_ZdWIAnHldZCyHXEt9PElvKawOTE490BKGaP4o-ZHhRFWEmbV3lSCDWvAkNjU4scti\n5.7.14 ZMX_tgpl5I_OqyPYNVL0YL9KXxA1gyGBM7yKcKWoMf98riNLm_TwJTPeQ7iGPM4E_sATpq\n5.7.14 Dyq0hfJs3kYsVCZels2NmS5GEghE> Please log in via your web browser and\n5.7.14 then try again.\n5.7.14  Learn more at\n5.7.14  https://support.google.com/mail/answer/78754 5sm1809000qky.21 - gsmtp')).
-Note that we can use Java to send email from the gmail account successfully. So it may because of either Django setting on the server or Gmail account (but Gmail account worked with java already!)
 
 # Customize
 ## Platform name
