@@ -93,6 +93,8 @@ Using gmail account (only work for clouding version, not work for vagrant local 
         
         "EMAIL_HOST_PASSWORD": "your gmail app password for edX"
         "EMAIL_HOST_USER": "your gmail address" # including @gmail.com
+
+    As well as `/edx/app/edxapp/edx-platform/lms/envs/bok_choy.env.json` and `/edx/etc/edxapp/lms.env.yaml`
     
 4. Modify file `/edx/app/edxapp/edx-platform/cms/envs/common.py`
         
