@@ -102,7 +102,7 @@ Using gmail account (only work for clouding version, not work for vagrant local 
         
         "SITE_NAME":"{your_URL}"
     
-6. Restart services (I tried `sudo su edxapp bash` before doing this but not sure if it is necessary or not)
+6. Restart services
         
         sudo su edxapp bash
         sudo /edx/bin/supervisorctl restart edxapp:
