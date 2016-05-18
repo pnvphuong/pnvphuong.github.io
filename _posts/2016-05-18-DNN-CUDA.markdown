@@ -7,7 +7,7 @@ date:   2016-05-18 15:18:00
 In post shares the installation of Deep Learning toolkits and GPU.
 
 # GPU installation
-Needs (at least) an installed GPU. Next thing is install CUDA library to control the GPU(s). Following this tutorial `http://docs.nvidia.com/cuda/cuda-installation-guide-linux/`
+Needs (at least) an installed GPU. Next thing is install CUDA library to control the GPU(s). Following this tutorial [NVIDIA's page] (http://docs.nvidia.com/cuda/cuda-installation-guide-linux/)
 
 After installing all prerequisites, download the deb file and install the library
         
@@ -25,7 +25,7 @@ When installing cuda, I encountered a error "Failed To Fetch" related to chrome 
 # Torch
 Torch is an open source machine learning library, a scientific computing framework, and a script language based on the Lua programming language. It provides a wide range of algorithms for deep machine learning, and uses an extremely fast scripting language LuaJIT, and an underlying C implementation.
 
-A good starting point for Torch is `http://torch.ch/docs/getting-started.html`
+A good starting point for Torch is  its [official page](http://torch.ch/docs/getting-started.html)
 
 ## Installing
 For Mac and Ubuntu 12+
@@ -35,4 +35,19 @@ For Mac and Ubuntu 12+
     cd ~/torch; bash install-deps;
     ./install.sh
     
+Next, we install cuDNN, the NVIDIA's GPU-accelerated library of primitives for deep neural networks (a free registration is required). After login with your registered account, download `cuDNN v5 Library for Linux` (named cudnn-7.5-linux-x64-v5.0-ga.tgz). Go to the downloaded folder and 
+                
+                tar -zxvf cudnn-7.5-linux-x64-v5.0-ga.tgz
+                # go to the extracted folder
+                cd cuda
+                sudo cp include/cudnn.h /usr/local/cuda-7.5/include
+                sudo cp lib64/libcudnn* /usr/local/cuda-7.5/lib64/
+                
 Then install cuda interface for Torch7
+                
+                sudo luarocks install cutorch
+                sudo luarocks install cunn
+                sudo luarocks install cudnn
+                
+Try with some [examples](http://torch.ch/docs/five-simple-examples.html) or [tutorial](http://torch.ch/docs/tutorials.html)
+
