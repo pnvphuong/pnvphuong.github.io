@@ -9,4 +9,6 @@ In post shares the installation of Deep Learning toolkits and GPU.
 # GPU installation
 Needs (at least) an installed GPU. Next thing is install CUDA library to control the GPU(s). Following this tutorial `http://docs.nvidia.com/cuda/cuda-installation-guide-linux/`
 
+The cuda library needs a post-installation restart to detect GPU(s)
+
 # Deep Learning tookit
