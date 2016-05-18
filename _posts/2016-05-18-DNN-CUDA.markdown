@@ -36,18 +36,18 @@ For Mac and Ubuntu 12+
     ./install.sh
     
 Next, we install cuDNN, the NVIDIA's GPU-accelerated library of primitives for deep neural networks (a free registration is required). After login with your registered account, download `cuDNN v5 Library for Linux` (named cudnn-7.5-linux-x64-v5.0-ga.tgz). Go to the downloaded folder and 
-                
-                tar -zxvf cudnn-7.5-linux-x64-v5.0-ga.tgz
-                # go to the extracted folder
-                cd cuda
-                sudo cp include/cudnn.h /usr/local/cuda-7.5/include
-                sudo cp lib64/libcudnn* /usr/local/cuda-7.5/lib64/
-                
+        
+        tar -zxvf cudnn-7.5-linux-x64-v5.0-ga.tgz
+        # go to the extracted folder
+        cd cuda
+        sudo cp include/cudnn.h /usr/local/cuda-7.5/include
+        sudo cp lib64/libcudnn* /usr/local/cuda-7.5/lib64/
+        
 Then install cuda interface for Torch7
-                
-                sudo luarocks install cutorch
-                sudo luarocks install cunn
-                sudo luarocks install cudnn
-                
+        
+        sudo luarocks install cutorch
+        sudo luarocks install cunn
+        sudo luarocks install cudnn
+        
 Try with some [examples](http://torch.ch/docs/five-simple-examples.html) or [tutorial](http://torch.ch/docs/tutorials.html)
 
