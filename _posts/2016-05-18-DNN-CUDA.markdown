@@ -1,1 +1,12 @@
+---
+layout: post
+title:  "Installing Deep Learning toolkits running on GPU"
+date:   2016-05-18 15:18:00
+---
 
+In post shares the installation of Deep Learning toolkits and GPU.
+
+# GPU installation
+Needs (at least) an installed GPU. Next thing is install CUDA library to control the GPU(s). Following this tutorial `http://docs.nvidia.com/cuda/cuda-installation-guide-linux/`
+
+# Deep Learning tookit
