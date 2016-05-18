@@ -21,9 +21,11 @@ A good starting point for Torch is `http://torch.ch/docs/getting-started.html`
 ## Installing
 For Mac and Ubuntu 12+
   
+  
   # in a terminal, run the commands WITHOUT sudo
   git clone https://github.com/torch/distro.git ~/torch --recursive
   cd ~/torch; bash install-deps;
   ./install.sh
+  
   
 Then install cuda interface for Torch7
