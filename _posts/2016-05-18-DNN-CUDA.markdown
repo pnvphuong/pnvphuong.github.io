@@ -18,6 +18,8 @@ After installing all prerequisites, download the deb file and install the librar
 
 The cuda library needs a post-installation restart to detect GPU(s)
 
+To manage the GPU, using `top` to see system's memory performance or `nvidia-smi -l 1` to manage all GPU
+
 When installing cuda, I encountered a error "Failed To Fetch" related to chrome multiple times. A solution is modifying the file `/etc/apt/sources.list.d/google-chrome.list` by inserting `[arch=amd64]` after the word *deb*
 
 # Torch
