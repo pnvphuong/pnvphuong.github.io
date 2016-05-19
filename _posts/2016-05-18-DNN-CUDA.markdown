@@ -28,14 +28,7 @@ Torch is an open source machine learning library, a scientific computing framewo
 A good starting point for Torch is  its [official page](http://torch.ch/docs/getting-started.html)
 
 ## Installing
-For Mac and Ubuntu 12+
-    
-    # in a terminal, run the commands WITHOUT sudo
-    git clone https://github.com/torch/distro.git ~/torch --recursive
-    cd ~/torch; bash install-deps;
-    ./install.sh
-    
-Next, we install cuDNN, the NVIDIA's GPU-accelerated library of primitives for deep neural networks (a free registration is required). After login with your registered account, download `cuDNN v5 Library for Linux` (named cudnn-7.5-linux-x64-v5.0-ga.tgz). Go to the downloaded folder and 
+First, we install cuDNN, the NVIDIA's GPU-accelerated library of primitives for deep neural networks (a free registration is required). After login with your registered account, download `cuDNN v5 Library for Linux` (named cudnn-7.5-linux-x64-v5.0-ga.tgz). Go to the downloaded folder and 
         
         tar -zxvf cudnn-7.5-linux-x64-v5.0-ga.tgz
         # go to the extracted folder
@@ -43,7 +36,15 @@ Next, we install cuDNN, the NVIDIA's GPU-accelerated library of primitives for d
         sudo cp include/cudnn.h /usr/local/cuda-7.5/include
         sudo cp lib64/libcudnn* /usr/local/cuda-7.5/lib64/
         
-Then install cuda interface for Torch7
+For Mac and Ubuntu 12+
+    
+    # in a terminal, run the commands WITHOUT sudo
+    git clone https://github.com/torch/distro.git ~/torch --recursive
+    cd ~/torch; bash install-deps;
+    ./install.sh
+    source ~/.bashrc
+    
+May need a server restart
         
         sudo luarocks install cutorch
         sudo luarocks install cunn
