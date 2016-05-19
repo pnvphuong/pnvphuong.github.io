@@ -46,9 +46,9 @@ For Mac and Ubuntu 12+
     
 May need a server restart
         
-        sudo luarocks install cutorch
-        sudo luarocks install cunn
-        sudo luarocks install cudnn
+        luarocks install cutorch
+        luarocks install cunn
+        luarocks install cudnn
         
 Try with some [examples](http://torch.ch/docs/five-simple-examples.html) or [tutorial](http://torch.ch/docs/tutorials.html)
 
