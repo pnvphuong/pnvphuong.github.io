@@ -52,3 +52,16 @@ May need a server restart
         
 Try with some [examples](http://torch.ch/docs/five-simple-examples.html) or [tutorial](http://torch.ch/docs/tutorials.html)
 
+# Theano & Keras
+Keras is a high level wrapper for Deep Learning libraries, e.g. Theano and Tensor Flow. This section introduces installing Keras to run on Theano backend on Ubuntu 14.04 and cuda 7.0
+## Theano
+        
+        sudo apt-get install python-numpy python-scipy python-dev python-pip python-nose g++ libopenblas-dev git
+        sudo pip install Theano
+        
+## Keras
+        
+        git clone https://github.com/fchollet/keras.git
+        cd keras
+        sudo python setup.py install
+        
