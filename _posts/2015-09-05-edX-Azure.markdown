@@ -8,7 +8,7 @@ In post shares the deployment process for Open edX release-named Cypress.
 Note that edX platform is evolving and there are different between versions. This post is for Cypress only
 
 # Installing
-Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-edx-on-microsoft-azure-2/) or [this blog](http://timsneath.com/installing-open-edx-on-microsoft-azure/). Will update my own later.
+Following [this blog](https://jonsan21.wordpress.com/2015/04/24/installing-open-edx-on-microsoft-azure-2/) or [this blog](http://timsneath.com/installing-open-edx-on-microsoft-azure/). Or the official guide line from [atlassian](https://openedx.atlassian.net/wiki/display/OpenOPS/Native+Open+edX+Ubuntu+12.04+64+bit+Installation).
 
 1. Having your Azure account registered
 2. Get RSA certifcation and private key for your account (GenPutty)
