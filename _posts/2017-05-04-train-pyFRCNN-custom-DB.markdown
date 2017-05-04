@@ -92,4 +92,30 @@ Some suggested modifications:
       2. Fine-tune pre-trained Faster R-CNN (FRCN) model and snapshot at iteration 0. Let's call the snapshot `Basketball_0.caffemodel`. Stop training.
       3. Rename the layers back to `cls_score` and `bbox_pred`.
       4. Fine-tune `Basketball_0.caffemodel` to get our final model.
-      
+## Training and Evaluation
+Before training on your new dataset, you may need to check $FRCN/data/cache to remove caches if necessary. Caches stores information of previously trained dataset. It may cause problem while training.
+### Training
+1. Rename the layers (to avoid override the pre-trained network's architecture)
+  As mentions in the previous part, rename the two layers.
+  Reminder: if you are using find and replace, please find the name with quotes(i.e. "cls_score"). If you just search for `cls_score`, without quotes, it may also replace some other layers since there is a layer named rpn_cls_score.
+2. First fine-tuning
+  The purpose of first fine-tuning is to get a caffemodel which has two outputs at final fully-connected layers.
+  ```
+  $ ./tools/train_net.py --gpu 0 --weights data/faster_rcnn_models/ZF_faster_rcnn_final.caffemodel --imdb basketball_train --cfg experiments/cfgs/config.yml --solver models/basketball/solver.prototxt --iter 0
+  ```
+  In general, what we do in the previous command is: call the `train_net` script/procedure using GPU. Network's initial weights are loaded from `data/faster_rcnn_models/ZF_faster_rcnn_final.caffemodel`, code to deal with dataset is `basketball_train` and configuration file is located at `experiments/cfgs/config.yml`. Finally, the solver information is loaded from `models/basketball/solver.prototxt`. 
+  After this fine-tuning, we should get the model we needed.
+3. Rename the layers back (to make it consisent with the test set)
+  Rename the two layers back to "cls_score" and "bbox_pred".
+4. Second fine-tuning
+  This fine-tuning should train models for our final use. The pre-trained model in this stage is the model we saved in stage 2.
+  ```
+  $ ./tools/train_net.py --gpu 0 --weights output/basketball/train/zf_faster_rcnn_basketball_iter_0.caffemodel --imdb basketball_train --cfg experiments/cfgs/config.yml --solver models/basketball/solver.prototxt --iter 10000
+  ```
+  Basically, it loads the network's weights we fine-tuned in the 2nd step (`iter_0` because we only train 1 pass), this time, we train for a long time, e.g. 10k iterations
+### Evaluating
+To test the performance of trained model, we can use the provided test_net.py for the purpose.
+```
+$ ./tools/test_net.py --gpu 0 --def models/basketball/test.prototxt --net output/basketball/train/zf_faster_rcnn_basketball_iter_20000.caffemodel --imdb basketball_val --cfg experiments/cfgs/config.yml
+``
+Why we only use 10k iteration for training but testing load a model from 20k iterations?
