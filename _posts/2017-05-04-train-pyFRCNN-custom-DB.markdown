@@ -12,7 +12,7 @@ Note: this package requires OpenCV
 
 # Setting up the dataset
 This is the main task. Normally, a dataset has at least 3 folders
-"""
+```
 |--dataset_folder
        |--Annotations
             |--*.txt/xml
@@ -20,11 +20,11 @@ This is the main task. Normally, a dataset has at least 3 folders
             |--*.png/jpg       
        |--ImageSets
             |--train/test/val/trainval.txt
-"""
+```
 Number of files and filenames in `Images` and `Annotations` are identiccal (except file extensions). Files in `ImageSets` will contain filename only (discarding file extension), simply thinking this is just a file list.
 There are 2 choices for files in `Annotations`: `txt` or `xml`. For now, follow `xml` version to match with `VOC2007`.
 A sample annotation file is (the annotation filename: `n02802426_999.xml`):
-"""
+```
 <annotation>
         <folder>n02802426</folder>
         <filename>n02802426_999</filename>
@@ -50,4 +50,4 @@ A sample annotation file is (the annotation filename: `n02802426_999.xml`):
                 </bndbox>
         </object>
 </annotation>
-"""
+```
