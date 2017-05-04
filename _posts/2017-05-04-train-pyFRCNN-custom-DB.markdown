@@ -81,6 +81,7 @@ Some suggested modifications:
     * train_net
     * snapshot_prefix
   * `train.prototxt` & `test.prototxt`: we need to update the number of output in final layers. For example, in a binary classification dataset, we only need 2 classes (background + basketball) and 8 output for bounding box regressor. Orignial pascal_voc have 21 classes including background and 21*4 bounding box regressor output.
+    
     There are two more items we need to modify. Since we are fine-tuning a pre-trained ConvNet model on our own dataset and the number of output at last fully-connected layers (clsscore & bboxpred) has been changed, the original weight in pre-trained ConvNet model is not suitable for our current network. The dimension is totally different. The details can be refered to Caffe's fine-tuning tutorial. The solution is to rename the layers such that the weights for the layers will be initialized randomly instead of copying from pre-trained model (actually copying from pre-trained model will cause error).
     ```
     name: "cls_score" -> name: "cls_score_basketball"
