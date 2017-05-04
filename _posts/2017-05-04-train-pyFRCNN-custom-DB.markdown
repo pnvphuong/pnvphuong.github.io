@@ -66,3 +66,29 @@ New python files are required to access to the new dataset.
 5. Update `$FRCN/lib/datasets/imdb.py` if needed, e.g. ImageNet images start with index 0 in row and col while PASCAL VOC dataset starts with index 1, we will update this in the function `append_flipped_images()`
 
 ## Prepare network and pre-trained model
+Basically we don't need to train the model from scratch unless you have a huge dataset which is comparable to ImageNet. Because a pre-trained Faster R-CNN contains a lot of good lower level features, which can be used generally.
+FRCNN provides ZF and VGG pre-trained VGG16. For example, to load the pre-trained ZF network
+```
+$ cd $FRCN/models
+# copy a well-defined network and make modification based on it
+$ mkdir your_project
+$ cp ./pascal_voc/ZF/faster_rcnn_end2end/* ./your_project/
+$ cd your_project
+```
+The content of `models/pascal_voc/ZF/faster_rcnn_end2end` is: `solver.prototxt` (tells the program where to find your ConvNet structure prototxt and some training setups, such as learning rate, learning policy, etc.), `train.prototxt` (describes the network structure, including number of layer, type of layer, number of neurons in each layer, etc.), and `test.prototxt`
+Some suggested modifications:
+  * `solver.prototxt`
+    * train_net
+    * snapshot_prefix
+  * `train.prototxt` & `test.prototxt`: we need to update the number of output in final layers. For example, in a binary classification dataset, we only need 2 classes (background + basketball) and 8 output for bounding box regressor. Orignial pascal_voc have 21 classes including background and 21*4 bounding box regressor output.
+    There are two more items we need to modify. Since we are fine-tuning a pre-trained ConvNet model on our own dataset and the number of output at last fully-connected layers (clsscore & bboxpred) has been changed, the original weight in pre-trained ConvNet model is not suitable for our current network. The dimension is totally different. The details can be refered to Caffe's fine-tuning tutorial. The solution is to rename the layers such that the weights for the layers will be initialized randomly instead of copying from pre-trained model (actually copying from pre-trained model will cause error).
+    ```
+    name: "cls_score" -> name: "cls_score_basketball"
+    name: "bbox_pred" -> name: "bbox_pred_basketball"
+    ```
+    However, renaming the layers may cause problems in later parts since "clsscore" and "bboxpred" are used as keys in testing. Therefore, in the training part, we can train the model accroding to the following procedure.
+      1. Rename the layers to `cls_score_basketball` and `bbox_pred_basketball`
+      2. Fine-tune pre-trained Faster R-CNN (FRCN) model and snapshot at iteration 0. Let's call the snapshot `Basketball_0.caffemodel`. Stop training.
+      3. Rename the layers back to `cls_score` and `bbox_pred`.
+      4. Fine-tune `Basketball_0.caffemodel` to get our final model.
+      
