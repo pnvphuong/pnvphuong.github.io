@@ -55,7 +55,7 @@ A sample annotation file is (the annotation filename: `n02802426_999.xml`):
 ```
 ## Preparing dataset files
 New python files are required to access to the new dataset.
-1. Add `$FRCN/lib/datasets/[yourDS].py`: reading/loading a part of the whole dataset. Basically, we can clone an existing file, e.g. [`pascal_voc.py`](https://github.com/rbgirshick/py-faster-rcnn/blob/master/lib/datasets/pascal_voc.py), then modify it to fit the new dataset (find and replace), e.g. [`inria.py`](https://github.com/deboc/py-faster-rcnn/blob/master/lib/datasets/inria.py)  
+1. Add `$FRCN/lib/datasets/[yourDS].py`: reading/loading a part of the whole dataset. Basically, we can clone an existing file, e.g. [`pascal_voc.py`](https://github.com/rbgirshick/py-faster-rcnn/blob/master/lib/datasets/pascal_voc.py), then modify it to fit the new dataset (find and replace), e.g. [`inria.py`](https://github.com/deboc/py-faster-rcnn/blob/master/lib/datasets/inria.py) or [basketball.py](https://github.com/Huangying-Zhan/py-faster-rcnn/blob/master/lib/datasets/basketball.py)
     1. Modify `self._classes` in the constructor function to fit your dataset.
     2. Be careful with the *extensions* of your image files. See `image_path_from_index` in `inria.py`.
     3. Write the function for parsing annotations. See `_load_inria_annotation` in `inria.py`.
