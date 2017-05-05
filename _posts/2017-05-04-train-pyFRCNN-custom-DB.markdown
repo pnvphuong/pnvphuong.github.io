@@ -61,7 +61,7 @@ New python files are required to access to the new dataset.
     3. Write the function for parsing annotations. See `_load_inria_annotation` in `inria.py`.
     4. Do not forget to add `import` syntaxes in your own python file and other python files in the same directory.
 2. Add `$FRCN/lib/datasets/[yourDS]_eval.py`: contain evaluating function, e.g. mAP
-3. Update `$FRCN/lib/factory.py`: loading all sets of the dataset (maybe scan all available files in the `$FRCN/dataset_folder/ImageSets` folder?
+3. Update `$FRCN/lib/factory.py`: loading all sets of the dataset. Manually assign data sets and *devkit_path*
 4. Adding a config file `$FRCN/experiments/cfgs/config.yml` (full configurable keywords can be found [here](https://github.com/rbgirshick/py-faster-rcnn/blob/96dc9f1dea3087474d6da5a98879072901ee9bf9/lib/fast_rcnn/config.py)). We can directly modify the `$FRCN/experiments/cfgs/faster_rcnn_end2end.yml`, e.g. setting `EXP_DIR` first and others if necessary, or it's OK to create a new config file and modify the training script to point to the new config file. The file location can be specific in the calling command later.    
 5. Update `$FRCN/lib/datasets/imdb.py` if needed, e.g. ImageNet images start with index 0 in row and col while PASCAL VOC dataset starts with index 1, we will update this in the function `append_flipped_images()`
 
