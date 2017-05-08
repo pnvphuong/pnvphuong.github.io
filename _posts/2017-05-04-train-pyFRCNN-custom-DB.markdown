@@ -74,8 +74,9 @@ New python files are required to access to the new dataset.
     4. Do not forget to add `import` syntaxes in your own python file and other python files in the same directory.
 2. Add `$FRCN/lib/datasets/[yourDS]_eval.py`: contain evaluating function, e.g. mAP
 3. Update `$FRCN/lib/factory.py`: loading all sets of the dataset. Manually assign data sets and *devkit_path*
-4. Update `$FRCN/lib/datasets/imdb.py` if needed, e.g. ImageNet images start with index 0 in row and col while PASCAL VOC dataset starts with index 1, we will update this in the function `append_flipped_images()`    
+4. Update `$FRCN/lib/datasets/imdb.py` if needed, e.g. ImageNet images start with index 0 in row and col while PASCAL VOC dataset starts with index 1, we will update this in the function `append_flipped_images()`.
 5. Adding a config file `$FRCN/experiments/cfgs/config.yml` (full configurable keywords can be found [here](https://github.com/rbgirshick/py-faster-rcnn/blob/96dc9f1dea3087474d6da5a98879072901ee9bf9/lib/fast_rcnn/config.py)). We can directly modify the `$FRCN/experiments/cfgs/faster_rcnn_end2end.yml`, e.g. setting `EXP_DIR` first and others if necessary, or it's OK to create a new config file and modify the training script to point to the new config file. The file location can be specific in the calling command later.
+6. For _eventness_ we may not need flipped images, set `USE_FLIPPED` = False in the configuration file
 
 ## Prepare network and pre-trained model
 Basically we don't need to train the model from scratch unless you have a huge dataset which is comparable to ImageNet. Because a pre-trained Faster R-CNN contains a lot of good lower level features, which can be used generally.
