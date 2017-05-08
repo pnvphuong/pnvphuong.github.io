@@ -125,6 +125,6 @@ Before training on your new dataset, you may need to check $FRCN/data/cache to r
 ### Evaluating
 To test the performance of trained model, we can use the provided test_net.py for the purpose.
 ```
-$ ./tools/test_net.py --gpu 0 --def models/basketball/test.prototxt --net output/basketball/train/zf_faster_rcnn_basketball_iter_20000.caffemodel --imdb basketball_val --cfg experiments/cfgs/config.yml
+$ ./tools/test_net.py --gpu 0 --def models/basketball/test.prototxt --net output/basketball/train/zf_faster_rcnn_basketball_iter_10000.caffemodel --imdb basketball_val --cfg experiments/cfgs/config.yml
 ```
-Why we only use 10k iteration for training but testing load a model from 20k iterations?
+
