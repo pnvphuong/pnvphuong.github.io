@@ -51,6 +51,18 @@ A sample annotation file is (the annotation filename: `n02802426_999.xml`):
                         <ymax>233</ymax>
                 </bndbox>
         </object>
+        <object>
+                <name>n02802427</name>
+                <pose>Unspecified</pose>
+                <truncated>0</truncated>
+                <difficult>0</difficult>
+                <bndbox>
+                        <xmin>16</xmin>
+                        <ymin>2</ymin>
+                        <xmax>45</xmax>
+                        <ymax>23</ymax>
+                </bndbox>
+        </object>
 </annotation>
 ```
 ## Preparing dataset files
