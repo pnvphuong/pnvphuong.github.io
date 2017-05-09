@@ -25,7 +25,7 @@ sudo ldconfig  # refresh shared library cache
 cd ../../../../..
 ```
 
-Build the library and example with extra optimization flags to give you code that will run faster on RPi 2, 3 (yay). Need to upgrade gcc to 4.8.3 first!
+Build the library and example with extra optimization flags to give you code that will run faster on RPi 2, 3 (yay). Need to upgrade gcc to [4.8.3](https://community.thinger.io/t/starting-with-the-raspberry-pi/36) first!
 ```
 make -f tensorflow/contrib/makefile/Makefile HOST_OS=PI TARGET=PI \
 OPTFLAGS="-Os -mfpu=neon-vfpv4 -funsafe-math-optimizations -ftree-vectorize" CXX=g++-4.8
