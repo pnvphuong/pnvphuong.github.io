@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "TensorFlow on Raspberry Pi"
-date:   2017-05-04 10:37:00
+date:   2017-05-09 10:37:00
 ---
 
 In post shares the steps to deploy TensorFlow models on Raspberry Pi
