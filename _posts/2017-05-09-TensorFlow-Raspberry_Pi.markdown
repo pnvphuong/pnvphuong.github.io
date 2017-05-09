@@ -13,6 +13,8 @@ First thing first, let's install TensorFlow on a Raspberry Pi. There are several
 ```
 git clone https://github.com/tensorflow/tensorflow.git
 tensorflow/contrib/makefile/download_dependencies.sh
+sudo apt-get update
+sudo apt-get -f upgrade
 sudo apt-get install -y autoconf automake libtool gcc-4.8 g++-4.8
 cd tensorflow/contrib/makefile/downloads/protobuf/
 ./autogen.sh
