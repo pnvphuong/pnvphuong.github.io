@@ -77,7 +77,7 @@ Here, we play with image classification to validate the installed TensorFlow lib
 
 Install libjpeg, so we can load image files:
 ```
-sudo apt-get install -y libjpeg-dev
+sudo apt-get install libjpeg8-dev imagemagick
 ```
 
 To download the example model you'll need, run these commands:
