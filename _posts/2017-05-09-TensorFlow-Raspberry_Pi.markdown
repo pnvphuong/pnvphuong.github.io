@@ -42,6 +42,34 @@ make -f tensorflow/contrib/makefile/Makefile HOST_OS=PI TARGET=PI OPTFLAGS="-Os"
 
 One thing to be careful of is that the `gcc` version 4.9 currently installed on *Jessie* by default will hit an error mentioning `__atomic_compare_exchange`. This is why the examples above specify `CXX=g++-4.8` explicitly, and why we install it using `apt-get`. If you have partially built using the default _gcc 4.9_, hit the error and switch to **4.8**, you need to do a `make -f tensorflow/contrib/makefile/Makefile clean` before you build. If you don't, the build will appear to succeed but you'll encounter [malloc(): memory corruption errors](https://github.com/tensorflow/tensorflow/issues/3442) when you try to run any programs using the library.
 
+## Using Package
+Make sure Raspberry Pi is running on at least Raspbian 8
+```
+cat /etc/os-release
+```
+
+Upgrade if needed
+```
+sudo sed -i 's/wheezy/jessie/' /etc/apt/sources.list
+sudo sed -i 's/wheezy/jessie/' /etc/apt/sources.list.d/raspi.list 
+sudo apt-get update && sudo apt-get -y upgrade # answer 'y' to upcoming questions 
+sudo apt-get -y dist-upgrade # answer 'y' to upcoming questions
+sudo init 6
+sudo apt-get -y autoremove
+sudo apt-get -y purge $(dpkg -l | awk '/^rc/ { print $2 }')
+sudo init 6
+```
+
+Follow instruction [here](https://github.com/samjabrahams/tensorflow-on-raspberry-pi)
+```
+sudo apt-get update
+sudo apt-get install python-pip python-dev
+wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl
+sudo pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
+sudo pip uninstall mock
+sudo pip install mock
+```
+
 # Deploy TensorFlow model
 ## Official examples
 For more examples, look at the [tensorflow/contrib/pi_examples](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/pi_examples) folder in the source tree, which contains code samples aimed at the *Raspberry Pi*.
