@@ -8,7 +8,7 @@ In post shares the steps to build neural networks using FRCNN on our dataset.
 
 # Installing
 Install py-Faster-RCNN using its [original github](https://github.com/rbgirshick/py-faster-rcnn) or follow some tutorials, such as [this one](https://huangying-zhan.github.io/2016/09/22/detection-faster-rcnn.html). Personally, I found the tutorial is easier to follow.
-Note: this package requires OpenCV
+Note: this package requires [OpenCV](http://www.pyimagesearch.com/2015/06/22/install-opencv-3-0-and-python-2-7-on-ubuntu/)
 
 # Setting up the dataset
 This is the main task.
